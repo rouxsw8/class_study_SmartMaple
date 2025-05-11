@@ -2,7 +2,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from src.scraper import scrape_and_save
 
 def start_scheduler():
-    scheduler = BackgroundScheduler()
+    scheduler = BackgroundScheduler(daemon=True)
     scheduler.add_job(scrape_and_save, "interval", hours=24)
     scheduler.start()
 
