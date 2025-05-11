@@ -8,7 +8,12 @@ If you have any questions in mind you can connect to me directly via info@smart-
 """
 from fastapi import FastAPI
 from src.scraper import data  # Import the 'data' function from scraper
+from scheduler import start_scheduler
 
+@app.on_event("startup")
+def startup_event():
+    start_scheduler()
+    
 app = FastAPI(title="Campground Scraper API")
 
 @app.get("/scrape", summary="Trigger campground scraping", tags=["Scraping"])
