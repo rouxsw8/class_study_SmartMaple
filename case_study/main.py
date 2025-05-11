@@ -9,12 +9,14 @@ If you have any questions in mind you can connect to me directly via info@smart-
 from fastapi import FastAPI
 from src.scraper import data  # Import the 'data' function from scraper
 
-app = FastAPI()
+app = FastAPI(title="Campground Scraper API")
 
-@app.get("/scrape")
+@app.get("/scrape", summary="Trigger campground scraping", tags=["Scraping"])
 async def scrape():
-    camp_data = data()  # Call the 'data' function
+    camp_data = data()
     return {"message": camp_data["message"]}
 
 if __name__ == "__main__":
+    import uvicorn
     print("Hello Smart Maple!")
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
